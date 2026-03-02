@@ -1,1 +1,224 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tom Ellis</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Bebas+Neue&display=swap');
+  :root { --dark-bg:#0a0a0a; --dark-text:#e8e0d5; --dark-dim:#8a8278; --accent:#c8a96e; --white-bg:#ffffff; --white-bg2:#f7f5f2; --text:#111111; --text-dim:#888880; --border:#e0ddd8; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--white-bg); color:var(--text); font-family:'EB Garamond',Georgia,serif; cursor:crosshair; overflow-x:hidden; }
+  header { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.8rem 3rem; display:flex; justify-content:space-between; align-items:center; background:rgba(10,10,10,0.97); border-bottom:1px solid #1e1e1e; }
+  .logo-name { font-family:'Bebas Neue',sans-serif; font-size:clamp(1.6rem,3vw,2.4rem); letter-spacing:0.2em; color:var(--dark-text); line-height:1; }
+  .logo-sub { font-style:italic; font-size:0.8rem; letter-spacing:0.3em; color:var(--dark-dim); text-transform:uppercase; margin-top:2px; }
+  nav { display:flex; gap:2.5rem; align-items:center; }
+  nav a { font-size:0.75rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--dark-dim); text-decoration:none; transition:color 0.3s; }
+  nav a:hover { color:var(--dark-text); }
+  .hero { height:100vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; background:var(--dark-bg); }
+  .hero-image { position:absolute; inset:0; background-size:cover; background-position:center 30%; filter:brightness(0.28) saturate(0.7); transform:scale(1.05); animation:heroZoom 20s ease-in-out infinite alternate; }
+  @keyframes heroZoom { from{transform:scale(1.05);}to{transform:scale(1.12);} }
+  .hero-content { position:relative; z-index:2; text-align:center; padding:2rem; }
+  .hero-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(5rem,15vw,14rem); letter-spacing:0.08em; line-height:0.9; color:var(--dark-text); }
+  .hero-title span { display:block; color:var(--accent); }
+  .hero-tagline { font-style:italic; font-size:clamp(1rem,2vw,1.4rem); color:var(--dark-dim); margin-top:1.5rem; letter-spacing:0.15em; }
+  .hero-scroll { position:absolute; bottom:3rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:0.5rem; color:var(--dark-dim); font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; }
+  .hero-scroll::after { content:''; width:1px; height:40px; background:linear-gradient(to bottom,var(--dark-dim),transparent); animation:scrollLine 2s ease-in-out infinite; }
+  @keyframes scrollLine { 0%,100%{transform:scaleY(1);opacity:1;}50%{transform:scaleY(0.5);opacity:0.3;} }
+  @keyframes fadeUp { to{opacity:1;transform:translateY(0);} }
+  @keyframes fadeIn { to{opacity:1;} }
+  .section-header { padding:5rem 3rem 2.5rem; display:flex; align-items:baseline; gap:2rem; border-bottom:1px solid var(--border); background:var(--white-bg); }
+  .section-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,4vw,3rem); letter-spacing:0.15em; color:var(--text); }
+  .section-count { font-style:italic; color:var(--text-dim); font-size:0.9rem; }
+  .featured-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:1.5rem; padding:1.5rem; background:var(--white-bg); }
+  .featured-item { overflow:hidden; background:var(--white-bg2); cursor:pointer; position:relative; opacity:1; transition:transform 0.8s ease; }
+  .featured-item.visible { opacity:1; }
+  .featured-item:nth-child(1) { grid-column:1; grid-row:1/3; min-height:580px; }
+  .featured-item:nth-child(2) { grid-column:2; grid-row:1; aspect-ratio:3/4; }
+  .featured-item:nth-child(3) { grid-column:3; grid-row:1; aspect-ratio:3/4; }
+  .featured-item:nth-child(4) { grid-column:2; grid-row:2; aspect-ratio:3/4; }
+  .featured-item:nth-child(5) { grid-column:3; grid-row:2; aspect-ratio:3/4; }
+  .featured-item:nth-child(6) { grid-column:1/3; grid-row:3; aspect-ratio:16/9; }
+  .featured-item:nth-child(7) { grid-column:3; grid-row:3; aspect-ratio:3/4; }
+  .featured-item:nth-child(8) { grid-column:1; grid-row:4; aspect-ratio:3/4; }
+  .featured-item:nth-child(9) { grid-column:2; grid-row:4; aspect-ratio:3/4; }
+  .featured-item:nth-child(10) { grid-column:3; grid-row:4; aspect-ratio:3/4; }
+  .featured-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94); }
+  .featured-item:hover img { transform:scale(1.03); }
+  .gallery { padding:0 1.5rem 6rem; background:var(--white-bg); }
+  .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.5rem; padding-top:1.5rem; }
+  .gallery-item { position:relative; overflow:hidden; background:var(--white-bg2); cursor:pointer; aspect-ratio:3/4; opacity:1; transform:translateY(0); transition:opacity 0.6s ease,transform 0.6s ease; }
+  .gallery-item.visible { opacity:1; transform:translateY(0); }
+  .gallery-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.6s ease; }
+  .gallery-item:hover img { transform:scale(1.03); }
+  .gallery-item-overlay { position:absolute; inset:0; background:rgba(255,255,255,0.92); opacity:0; transition:opacity 0.3s ease; display:flex; align-items:center; justify-content:center; padding:1.5rem; }
+  .gallery-item:hover .gallery-item-overlay { opacity:1; }
+  .gallery-item-title { font-style:italic; font-size:1rem; color:var(--text); text-align:center; }
+  .statement { padding:6rem 3rem; max-width:820px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--white-bg); }
+  .statement-text { font-size:clamp(1.2rem,2.2vw,1.6rem); line-height:1.75; font-style:italic; color:var(--text); }
+  .statement-text em { font-style:normal; font-weight:500; }
+  .contact { padding:5rem 3rem; display:flex; flex-direction:column; align-items:flex-start; gap:1.5rem; background:var(--white-bg); }
+  .contact-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,4vw,3rem); letter-spacing:0.2em; color:var(--text); }
+  .contact-text { font-style:italic; color:var(--text-dim); font-size:1.05rem; line-height:1.8; }
+  .contact-email { font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.3em; color:var(--text); text-decoration:none; border-bottom:1px solid var(--border); transition:border-color 0.3s; padding-bottom:2px; }
+  .contact-email:hover { border-color:var(--text); }
+  footer { padding:2rem 3rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; background:var(--white-bg); }
+  .footer-name { font-family:'Bebas Neue',sans-serif; font-size:0.9rem; letter-spacing:0.2em; color:var(--text-dim); }
+  .footer-year { font-style:italic; font-size:0.8rem; color:var(--text-dim); opacity:0.6; }
+  .lightbox { display:none; position:fixed; inset:0; z-index:1000; background:rgba(255,255,255,0.97); align-items:center; justify-content:center; cursor:pointer; }
+  .lightbox.open { display:flex; animation:fadeIn 0.2s ease; }
+  .lightbox-inner { max-width:88vw; max-height:88vh; cursor:default; display:flex; flex-direction:column; align-items:center; gap:1.2rem; }
+  .lightbox img { max-width:88vw; max-height:80vh; object-fit:contain; display:block; }
+  .lightbox-title { font-style:italic; color:var(--text-dim); font-size:0.85rem; letter-spacing:0.15em; }
+  .lightbox-close { position:fixed; top:2rem; right:2.5rem; font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.2em; color:var(--text-dim); cursor:pointer; transition:color 0.2s; z-index:1001; }
+  .lightbox-close:hover { color:var(--text); }
+  .lightbox-nav { position:fixed; top:50%; transform:translateY(-50%); font-size:1.5rem; color:var(--text-dim); cursor:pointer; transition:color 0.2s; padding:1rem; z-index:1001; }
+  .lightbox-nav:hover { color:var(--text); }
+  .lightbox-prev { left:1.5rem; }
+  .lightbox-next { right:1.5rem; }
+  @media (max-width:900px) {
+    header { padding:1.5rem; }
+    .featured-grid { grid-template-columns:1fr 1fr; }
+    .featured-item:nth-child(1) { grid-column:1/3; grid-row:auto; min-height:300px; }
+    .featured-item:nth-child(2),.featured-item:nth-child(3),.featured-item:nth-child(4),.featured-item:nth-child(5),.featured-item:nth-child(7),.featured-item:nth-child(8),.featured-item:nth-child(9),.featured-item:nth-child(10) { grid-column:auto; grid-row:auto; }
+    .featured-item:nth-child(6) { grid-column:1/3; grid-row:auto; }
+    .section-header { padding:3rem 1.5rem 2rem; }
+    .gallery { padding:0 1rem 4rem; }
+    .gallery-grid { gap:1rem; padding-top:1rem; }
+    .statement { padding:4rem 1.5rem; }
+    .contact { padding:4rem 1.5rem; }
+    footer { padding:2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <div class="logo-name">Tom Ellis</div>
+    <div class="logo-sub">Painter</div>
+  </div>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#statement">Statement</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+<section class="hero">
+  <div class="hero-image" id="hero-bg"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Tom<span>Ellis</span></h1>
+    <p class="hero-tagline">Figuration dissolving into something more violent and beautiful</p>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+<div id="work">
+  <div class="section-header">
+    <h2 class="section-title">Selected Works</h2>
+    <span class="section-count">2023–26</span>
+  </div>
+  <div class="featured-grid" id="featured"></div>
+  <div class="section-header">
+    <h2 class="section-title">Works</h2>
+    <span class="section-count" id="work-count"></span>
+  </div>
+  <div class="gallery">
+    <div class="gallery-grid" id="gallery"></div>
+  </div>
+</div>
+<section class="statement" id="statement">
+  <p class="statement-text">
+    Figures emerge and dissolve. Titles collide against surfaces that seduce.
+    The work lives in the space between <em>recognition and abstraction</em> &mdash;
+    where something human insists on being present even as the paint refuses to confirm it.
+    Aggressive, beautiful, comic, tender. All at once.
+  </p>
+</section>
+<section class="contact" id="contact">
+  <h2 class="contact-title">Inquiries</h2>
+  <p class="contact-text">For studio visits, exhibition proposals, and acquisition enquiries.</p>
+  <a href="/cdn-cgi/l/email-protection#4e3d3a3b2a27210e3a21232b2222273d602f3c3a" class="contact-email"><span class="__cf_email__" data-cfemail="a0d3d4d5c4c9cfe0d4cfcdc5ccccc9d38ec1d2d4">[email&#160;protected]</span></a>
+</section>
+<footer>
+  <div class="footer-name">Tom Ellis</div>
+  <div class="footer-year">&copy; 2026</div>
+</footer>
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lightbox-close">Close &times;</span>
+  <span class="lightbox-nav lightbox-prev" id="lightbox-prev">&#8592;</span>
+  <span class="lightbox-nav lightbox-next" id="lightbox-next">&#8594;</span>
+  <div class="lightbox-inner" id="lightbox-inner">
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-title" id="lightbox-title"></div>
+  </div>
+</div>
+<script>
+var images=[{src:'images/001_amour_propre.jpg',title:'Amour Propre'},{src:'images/002_tr_s.jpg',title:'Très'},{src:'images/003_lincoln.jpg',title:'Lincoln\'},{src:'images/004_little_gatinha_cult.jpg',title:'Little Gatinha Cult'},{src:'images/005_die_baigneuse_gr_n.jpg',title:'Die Baigneuse Grün'},{src:'images/006_romantic.jpg',title:'Romantic'},{src:'images/007_untitled.jpg',title:'Untitled'},{src:'images/008_bigger_lincoln.jpg',title:'Bigger Lincoln\'},{src:'images/009_buddha_painting.jpg',title:'Buddha Painting'},{src:'images/010_14_08_23.jpg',title:'14 08 23'},{src:'images/011_linco_mon.jpg',title:'Linco Mon'},{src:'images/012_untitled.jpg',title:'Untitled'},{src:'images/013_lincoln.jpg',title:'Lincoln\'},{src:'images/014_untitled.jpg',title:'Untitled'},{src:'images/015_untitled.jpg',title:'Untitled'},{src:'images/016_untitled.jpg',title:'Untitled'},{src:'images/017_untitled.jpg',title:'Untitled'},{src:'images/018_untitled.jpg',title:'Untitled'},{src:'images/019_untitled.jpg',title:'Untitled'},{src:'images/020_untitled.jpg',title:'Untitled'},{src:'images/021_untitled.jpg',title:'Untitled'},{src:'images/022_untitled.jpg',title:'Untitled'},{src:'images/023_untitled.jpg',title:'Untitled'},{src:'images/024_6_buddha_position.jpg',title:'#6 Buddha Position'},{src:'images/025_untitled.jpg',title:'Untitled'},{src:'images/026_untitled.jpg',title:'Untitled'},{src:'images/027_untitled.png',title:'Untitled'},{src:'images/028_untitled.jpg',title:'Untitled'},{src:'images/029_the_fun.jpg',title:'The Fun\'},{src:'images/030_untitled.jpg',title:'Untitled'},{src:'images/031_buddha.jpg',title:'Buddha'},{src:'images/032_untitled.jpg',title:'Untitled'}];
+    var div=document.createElement('div'); div.className='featured-item';
+    var img=document.createElement('img'); img.src=item.src; img.alt=item.title; img.loading='lazy';
+    div.appendChild(img);
+    div.addEventListener('click',function(){openLightbox(idx);});
+    featuredEl.appendChild(div);
+  })(fi);
+}
+var galleryEl=document.getElementById('gallery');
+document.getElementById('work-count').textContent=images.length+' works';
+for(var gi=0;gi<images.length;gi++){
+  (function(i){
+    var img=images[i];
+    var div=document.createElement('div'); div.className='gallery-item';
+    var imgEl=document.createElement('img'); imgEl.src=img.src; imgEl.alt=img.title; imgEl.loading='lazy';
+    var overlay=document.createElement('div'); overlay.className='gallery-item-overlay';
+    var titleEl=document.createElement('div'); titleEl.className='gallery-item-title'; titleEl.textContent=img.title;
+    overlay.appendChild(titleEl); div.appendChild(imgEl); div.appendChild(overlay);
+    div.addEventListener('click',function(){openLightbox(i);});
+    galleryEl.appendChild(div);
+  })(gi);
+}
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      var idx=Array.from(entry.target.parentNode.children).indexOf(entry.target);
+      setTimeout(function(){entry.target.classList.add('visible');},60*(idx%8));
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.05});
+document.querySelectorAll('.gallery-item,.featured-item').forEach(function(el){observer.observe(el);});
+var currentIndex=0;
+function openLightbox(index){
+  currentIndex=index;
+  document.getElementById('lightbox-img').src=images[index].src;
+  document.getElementById('lightbox-title').textContent=images[index].title;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+function nextImage(){currentIndex=(currentIndex+1)%images.length;openLightbox(currentIndex);}
+function prevImage(){currentIndex=(currentIndex-1+images.length)%images.length;openLightbox(currentIndex);}
+document.getElementById('lightbox-close').addEventListener('click',closeLightbox);
+document.getElementById('lightbox-next').addEventListener('click',function(e){e.stopPropagation();nextImage();});
+document.getElementById('lightbox-prev').addEventListener('click',function(e){e.stopPropagation();prevImage();});
+document.getElementById('lightbox').addEventListener('click',closeLightbox);
+document.getElementById('lightbox-inner').addEventListener('click',function(e){e.stopPropagation();});
+document.addEventListener('keydown',function(e){
+  if(document.getElementById('lightbox').classList.contains('open')){
+    if(e.key==='ArrowRight')nextImage();
+    else if(e.key==='ArrowLeft')prevImage();
+    else if(e.key==='Escape')closeLightbox();
+  }
+});
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor){
+  anchor.addEventListener('click',function(e){
+    e.preventDefault();
+    var target=document.querySelector(anchor.getAttribute('href'));
+    if(target){
+      var headerOffset=80;
+      var elementPosition=target.getBoundingClientRect().top;
+      var offsetPosition=elementPosition+window.pageYOffset-headerOffset;
+      window.scrollTo({top:offsetPosition,behavior:'smooth'});
+    }
+  });
+});
+</script>
+</body>
+</html>
