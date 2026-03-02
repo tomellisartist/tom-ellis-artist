@@ -152,49 +152,101 @@
   </div>
 </div>
 <script>
-var images=[{src:'images/001_amour_propre.jpg',title:'Amour Propre'},{src:'images/002_tr_s.jpg',title:'Très'},{src:'images/003_lincoln.jpg',title:'Lincoln\'},{src:'images/004_little_gatinha_cult.jpg',title:'Little Gatinha Cult'},{src:'images/005_die_baigneuse_gr_n.jpg',title:'Die Baigneuse Grün'},{src:'images/006_romantic.jpg',title:'Romantic'},{src:'images/007_untitled.jpg',title:'Untitled'},{src:'images/008_bigger_lincoln.jpg',title:'Bigger Lincoln\'},{src:'images/009_buddha_painting.jpg',title:'Buddha Painting'},{src:'images/010_14_08_23.jpg',title:'14 08 23'},{src:'images/011_linco_mon.jpg',title:'Linco Mon'},{src:'images/012_untitled.jpg',title:'Untitled'},{src:'images/013_lincoln.jpg',title:'Lincoln\'},{src:'images/014_untitled.jpg',title:'Untitled'},{src:'images/015_untitled.jpg',title:'Untitled'},{src:'images/016_untitled.jpg',title:'Untitled'},{src:'images/017_untitled.jpg',title:'Untitled'},{src:'images/018_untitled.jpg',title:'Untitled'},{src:'images/019_untitled.jpg',title:'Untitled'},{src:'images/020_untitled.jpg',title:'Untitled'},{src:'images/021_untitled.jpg',title:'Untitled'},{src:'images/022_untitled.jpg',title:'Untitled'},{src:'images/023_untitled.jpg',title:'Untitled'},{src:'images/024_6_buddha_position.jpg',title:'#6 Buddha Position'},{src:'images/025_untitled.jpg',title:'Untitled'},{src:'images/026_untitled.jpg',title:'Untitled'},{src:'images/027_untitled.png',title:'Untitled'},{src:'images/028_untitled.jpg',title:'Untitled'},{src:'images/029_the_fun.jpg',title:'The Fun\'},{src:'images/030_untitled.jpg',title:'Untitled'},{src:'images/031_buddha.jpg',title:'Buddha'},{src:'images/032_untitled.jpg',title:'Untitled'}];
-    var div=document.createElement('div'); div.className='featured-item';
-    var img=document.createElement('img'); img.src=item.src; img.alt=item.title; img.loading='lazy';
+var images=[
+  {src:'images/001_amour_propre.jpg',title:'Amour Propre'},
+  {src:'images/002_tr_s.jpg',title:'Tres'},
+  {src:'images/003_lincoln.jpg',title:'Lincoln'},
+  {src:'images/004_little_gatinha_cult.jpg',title:'Little Gatinha Cult'},
+  {src:'images/005_die_baigneuse_gr_n.jpg',title:'Die Baigneuse Grun'},
+  {src:'images/006_romantic.jpg',title:'Romantic'},
+  {src:'images/007_untitled.jpg',title:'Untitled'},
+  {src:'images/008_bigger_lincoln.jpg',title:'Bigger Lincoln'},
+  {src:'images/009_buddha_painting.jpg',title:'Buddha Painting'},
+  {src:'images/010_14_08_23.jpg',title:'14 08 23'},
+  {src:'images/011_linco_mon.jpg',title:'Linco Mon'},
+  {src:'images/012_untitled.jpg',title:'Untitled'},
+  {src:'images/013_lincoln.jpg',title:'Lincoln'},
+  {src:'images/014_untitled.jpg',title:'Untitled'},
+  {src:'images/015_untitled.jpg',title:'Untitled'},
+  {src:'images/016_untitled.jpg',title:'Untitled'},
+  {src:'images/017_untitled.jpg',title:'Untitled'},
+  {src:'images/018_untitled.jpg',title:'Untitled'},
+  {src:'images/019_untitled.jpg',title:'Untitled'},
+  {src:'images/020_untitled.jpg',title:'Untitled'},
+  {src:'images/021_untitled.jpg',title:'Untitled'},
+  {src:'images/022_untitled.jpg',title:'Untitled'},
+  {src:'images/023_untitled.jpg',title:'Untitled'},
+  {src:'images/024_6_buddha_position.jpg',title:'#6 Buddha Position'},
+  {src:'images/025_untitled.jpg',title:'Untitled'},
+  {src:'images/026_untitled.jpg',title:'Untitled'},
+  {src:'images/027_untitled.png',title:'Untitled'},
+  {src:'images/028_untitled.jpg',title:'Untitled'},
+  {src:'images/029_the_fun.jpg',title:'The Fun'},
+  {src:'images/030_untitled.jpg',title:'Untitled'},
+  {src:'images/031_buddha.jpg',title:'Buddha'},
+  {src:'images/032_untitled.jpg',title:'Untitled'}
+];
+
+// Hero image
+var heroBg = document.getElementById('hero-bg');
+if(heroBg && images.length > 0){
+  heroBg.style.backgroundImage = "url('" + images[0].src + "')";
+}
+
+// Featured grid - first 10 images
+var featuredEl = document.getElementById('featured');
+var featuredIndices = [0,1,2,3,4,5,6,7,8,9];
+for(var fi=0; fi<featuredIndices.length && featuredIndices[fi]<images.length; fi++){
+  (function(idx){
+    var item = images[idx];
+    var div = document.createElement('div'); div.className='featured-item';
+    var img = document.createElement('img'); img.src=item.src; img.alt=item.title; img.loading='lazy';
     div.appendChild(img);
     div.addEventListener('click',function(){openLightbox(idx);});
     featuredEl.appendChild(div);
-  })(fi);
+  })(featuredIndices[fi]);
 }
-var galleryEl=document.getElementById('gallery');
-document.getElementById('work-count').textContent=images.length+' works';
-for(var gi=0;gi<images.length;gi++){
+
+// Gallery - all images
+var galleryEl = document.getElementById('gallery');
+document.getElementById('work-count').textContent = images.length + ' works';
+for(var gi=0; gi<images.length; gi++){
   (function(i){
-    var img=images[i];
-    var div=document.createElement('div'); div.className='gallery-item';
-    var imgEl=document.createElement('img'); imgEl.src=img.src; imgEl.alt=img.title; imgEl.loading='lazy';
-    var overlay=document.createElement('div'); overlay.className='gallery-item-overlay';
-    var titleEl=document.createElement('div'); titleEl.className='gallery-item-title'; titleEl.textContent=img.title;
+    var img = images[i];
+    var div = document.createElement('div'); div.className='gallery-item';
+    var imgEl = document.createElement('img'); imgEl.src=img.src; imgEl.alt=img.title; imgEl.loading='lazy';
+    var overlay = document.createElement('div'); overlay.className='gallery-item-overlay';
+    var titleEl = document.createElement('div'); titleEl.className='gallery-item-title'; titleEl.textContent=img.title;
     overlay.appendChild(titleEl); div.appendChild(imgEl); div.appendChild(overlay);
     div.addEventListener('click',function(){openLightbox(i);});
     galleryEl.appendChild(div);
   })(gi);
 }
-var observer=new IntersectionObserver(function(entries){
+
+// Intersection observer for animations
+var observer = new IntersectionObserver(function(entries){
   entries.forEach(function(entry){
     if(entry.isIntersecting){
-      var idx=Array.from(entry.target.parentNode.children).indexOf(entry.target);
-      setTimeout(function(){entry.target.classList.add('visible');},60*(idx%8));
+      var idx = Array.from(entry.target.parentNode.children).indexOf(entry.target);
+      setTimeout(function(){entry.target.classList.add('visible');}, 60*(idx%8));
       observer.unobserve(entry.target);
     }
   });
 },{threshold:0.05});
 document.querySelectorAll('.gallery-item,.featured-item').forEach(function(el){observer.observe(el);});
-var currentIndex=0;
+
+// Lightbox
+var currentIndex = 0;
 function openLightbox(index){
-  currentIndex=index;
-  document.getElementById('lightbox-img').src=images[index].src;
-  document.getElementById('lightbox-title').textContent=images[index].title;
+  currentIndex = index;
+  document.getElementById('lightbox-img').src = images[index].src;
+  document.getElementById('lightbox-title').textContent = images[index].title;
   document.getElementById('lightbox').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
-function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
-function nextImage(){currentIndex=(currentIndex+1)%images.length;openLightbox(currentIndex);}
-function prevImage(){currentIndex=(currentIndex-1+images.length)%images.length;openLightbox(currentIndex);}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow='';}
+function nextImage(){currentIndex=(currentIndex+1)%images.length; openLightbox(currentIndex);}
+function prevImage(){currentIndex=(currentIndex-1+images.length)%images.length; openLightbox(currentIndex);}
 document.getElementById('lightbox-close').addEventListener('click',closeLightbox);
 document.getElementById('lightbox-next').addEventListener('click',function(e){e.stopPropagation();nextImage();});
 document.getElementById('lightbox-prev').addEventListener('click',function(e){e.stopPropagation();prevImage();});
@@ -207,15 +259,17 @@ document.addEventListener('keydown',function(e){
     else if(e.key==='Escape')closeLightbox();
   }
 });
+
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(function(anchor){
   anchor.addEventListener('click',function(e){
     e.preventDefault();
-    var target=document.querySelector(anchor.getAttribute('href'));
+    var target = document.querySelector(anchor.getAttribute('href'));
     if(target){
-      var headerOffset=80;
-      var elementPosition=target.getBoundingClientRect().top;
-      var offsetPosition=elementPosition+window.pageYOffset-headerOffset;
-      window.scrollTo({top:offsetPosition,behavior:'smooth'});
+      var headerOffset = 80;
+      var elementPosition = target.getBoundingClientRect().top;
+      var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({top:offsetPosition, behavior:'smooth'});
     }
   });
 });
