@@ -38,11 +38,7 @@
   .featured-item:nth-child(3) { grid-column:3; grid-row:1; aspect-ratio:3/4; }
   .featured-item:nth-child(4) { grid-column:2; grid-row:2; aspect-ratio:3/4; }
   .featured-item:nth-child(5) { grid-column:3; grid-row:2; aspect-ratio:3/4; }
-  .featured-item:nth-child(6) { grid-column:1/3; grid-row:3; aspect-ratio:16/9; }
-  .featured-item:nth-child(7) { grid-column:3; grid-row:3; aspect-ratio:3/4; }
-  .featured-item:nth-child(8) { grid-column:1; grid-row:4; aspect-ratio:3/4; }
-  .featured-item:nth-child(9) { grid-column:2; grid-row:4; aspect-ratio:3/4; }
-  .featured-item:nth-child(10) { grid-column:3; grid-row:4; aspect-ratio:3/4; }
+  .featured-item:nth-child(6) { grid-column:2/4; grid-row:3; aspect-ratio:16/9; }
   .featured-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94); }
   .featured-item:hover img { transform:scale(1.03); }
   .gallery { padding:0 1.5rem 6rem; background:var(--white-bg); }
@@ -80,8 +76,8 @@
     header { padding:1.5rem; }
     .featured-grid { grid-template-columns:1fr 1fr; }
     .featured-item:nth-child(1) { grid-column:1/3; grid-row:auto; min-height:300px; }
-    .featured-item:nth-child(2),.featured-item:nth-child(3),.featured-item:nth-child(4),.featured-item:nth-child(5),.featured-item:nth-child(7),.featured-item:nth-child(8),.featured-item:nth-child(9),.featured-item:nth-child(10) { grid-column:auto; grid-row:auto; }
-    .featured-item:nth-child(6) { grid-column:1/3; grid-row:auto; }
+    .featured-item:nth-child(2),.featured-item:nth-child(3),.featured-item:nth-child(4),.featured-item:nth-child(5) { grid-column:auto; grid-row:auto; }
+    .featured-item:nth-child(6) { grid-column:1/3; grid-row:auto; aspect-ratio:16/9; }
     .section-header { padding:3rem 1.5rem 2rem; }
     .gallery { padding:0 1rem 4rem; }
     .gallery-grid { gap:1rem; padding-top:1rem; }
@@ -153,38 +149,23 @@
 </div>
 <script>
 var images=[
-  {src:'images/001_amour_propre.jpg',title:'Amour Propre'},
-  {src:'images/002_tr_s.jpg',title:'Tres'},
-  {src:'images/003_lincoln.jpg',title:'Lincoln'},
-  {src:'images/004_little_gatinha_cult.jpg',title:'Little Gatinha Cult'},
-  {src:'images/005_die_baigneuse_gr_n.jpg',title:'Die Baigneuse Grun'},
-  {src:'images/006_romantic.jpg',title:'Romantic'},
-  {src:'images/007_untitled.jpg',title:'Untitled'},
-  {src:'images/008_bigger_lincoln.jpg',title:'Bigger Lincoln'},
-  {src:'images/009_buddha_painting.jpg',title:'Buddha Painting'},
-  {src:'images/010_14_08_23.jpg',title:'14 08 23'},
-  {src:'images/011_linco_mon.jpg',title:'Linco Mon'},
-  {src:'images/012_untitled.jpg',title:'Untitled'},
-  {src:'images/013_lincoln.jpg',title:'Lincoln'},
-  {src:'images/014_untitled.jpg',title:'Untitled'},
-  {src:'images/015_untitled.jpg',title:'Untitled'},
-  {src:'images/016_untitled.jpg',title:'Untitled'},
-  {src:'images/017_untitled.jpg',title:'Untitled'},
-  {src:'images/018_untitled.jpg',title:'Untitled'},
-  {src:'images/019_untitled.jpg',title:'Untitled'},
-  {src:'images/020_untitled.jpg',title:'Untitled'},
-  {src:'images/021_untitled.jpg',title:'Untitled'},
-  {src:'images/022_untitled.jpg',title:'Untitled'},
-  {src:'images/023_untitled.jpg',title:'Untitled'},
-  {src:'images/024_6_buddha_position.jpg',title:'#6 Buddha Position'},
-  {src:'images/025_untitled.jpg',title:'Untitled'},
-  {src:'images/026_untitled.jpg',title:'Untitled'},
-  {src:'images/027_untitled.png',title:'Untitled'},
-  {src:'images/028_untitled.jpg',title:'Untitled'},
-  {src:'images/029_the_fun.jpg',title:'The Fun'},
-  {src:'images/030_untitled.jpg',title:'Untitled'},
-  {src:'images/031_buddha.jpg',title:'Buddha'},
-  {src:'images/032_untitled.jpg',title:'Untitled'}
+  {src:'images/001_amour_propre.jpg',title:'Amour Propre',year:'2025',medium:'Oil and marker on board',dimensions:'43.9 x 40.6cm'},
+  {src:'images/002_tres.jpg',title:'Très',year:'2025',medium:'Oil and marker on board',dimensions:'45 x 33cm'},
+  {src:'images/003_lincolns_mom_rosafarben.jpg',title:'Lincoln\u2019s Mom Rosafarben',year:'2026',medium:'Gouache and marker on board',dimensions:'35 x 22.1cm'},
+  {src:'images/004_little_gatinha_chat.jpg',title:'Little Gatinha Chat',year:'2024',medium:'Oil and marker on board',dimensions:'32 x 23.9cm'},
+  {src:'images/005_die_baigneuse_gr_n.jpg',title:'Die Baigneuse Gr\u00fcn Mit Cigaretten (Skizze)',year:'2025',medium:'Oil and marker on board',dimensions:'45 x 33cm'},
+  {src:'images/006_romantic.jpg',title:'Romantic',year:'2026',medium:'Oil and marker on board',dimensions:'40 x 30cm'},
+  {src:'images/007_drop_from_the_thirteenth_a.jpg',title:'Drops From The Thirteenth',year:'2026',medium:'Acrylic on canvas',dimensions:''},
+  {src:'images/009_buddha_painting.jpg',title:'Buddha Painting',year:'2026',medium:'Oil and marker on board',dimensions:'47 x 43.1cm'},
+  {src:'images/010_Chatinha.jpg',title:'Chatinha',year:'2023',medium:'Gouache and marker on board',dimensions:'37.5 x 26cm'},
+  {src:'images/011_linco_mon_verte.jpg',title:'Lincoln\u2019s Mom Verte',year:'2026',medium:'Gouache and marker on board',dimensions:'35 x 22cm'},
+  {src:'images/012_More_Flowers_For_Clarice_Ultra_V.jpg',title:'More Flowers For Clarice Ultra Viole(n)t',year:'2026',medium:'Gouache and marker on board',dimensions:'20.7 x 15.8cm'},
+  {src:'images/013_more_flowers_for_clarice_grün.jpg',title:'More Flowers For Clarice Ultra Gr\u00fcn',year:'2026',medium:'Gouache and marker on board',dimensions:'27.1 x 16.1cm'},
+  {src:'images/014_Think_In_Buddha_Position.jpg',title:'Think In Buddha Position',year:'2026',medium:'Oil and marker on board',dimensions:'29.6 x 20cm'},
+  {src:'images/015_we_came_here_to_get_ laid.jpg',title:'We Came Here To Get Laid',year:'2026',medium:'Gouache and marker on board',dimensions:'35 x 21.8cm'},
+  {src:'images/016_Santas_Sister.jpg',title:'Santa\u2019s Sister',year:'2026',medium:'Gouache and marker on board',dimensions:'35 x 22cm'},
+  {src:'images/017_Geheimnis_Viole(n)t.jpeg',title:'Geheimnis Viole(n)t',year:'2026',medium:'Oil and marker on board',dimensions:'35 x 22cm'},
+  {src:'images/018_O_Gatinha.jpeg',title:'O Gatinha',year:'2023',medium:'Oil on plywood',dimensions:'32 x 24cm'}
 ];
 
 // Hero image
@@ -193,9 +174,9 @@ if(heroBg && images.length > 0){
   heroBg.style.backgroundImage = "url('" + images[1].src + "')"; // Très
 }
 
-// Featured grid - first 10 images
+// Featured grid - first 6 images
 var featuredEl = document.getElementById('featured');
-var featuredIndices = [0,1,2,3,4,5,6,7,8,9];
+var featuredIndices = [0,1,2,3,4,5];
 for(var fi=0; fi<featuredIndices.length && featuredIndices[fi]<images.length; fi++){
   (function(idx){
     var item = images[idx];
